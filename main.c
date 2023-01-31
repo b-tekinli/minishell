@@ -14,6 +14,10 @@
 
 t_minishell	g_ms;
 
+/*
+"init_app" adlı fonksiyon, uygulamanın başlatılması sırasında gerekli olan ilk adımların yapılmasını sağlar. Bu fonksiyon, bellekte errno değişkeni için bir boşluk açar, "g_ms.paths" global değişkenini NULL'a ayarlar, "g_ms.parent_pid" global değişkenini çalışan programın PID'sini alır, "set_env" fonksiyonunu çağırarak ortam değişkenlerini ayarlar ve "set_paths" fonksiyonunu çağırarak yolları ayarlar.
+*/
+
 void	init_app(char **env)
 {
 	errno = 0;
@@ -22,6 +26,8 @@ void	init_app(char **env)
 	set_env(env);
 	set_paths();
 }
+
+/*"init_shell" fonksiyonu, bir kullanıcı tarafından girilen komut satırının tokenize edilmesi, lexer tarafından analiz edilmesi ve sonuçta çalıştırılmasını sağlar. Bu fonksiyon, token dizilerini ve işlem dizilerini g_ms yapısı içerisinde tanımlar ve başlatır, ardından da çalıştırılması tamamlanan komut satırından boşalmasını sağlar.*/
 
 void	init_shell(char *input)
 {
@@ -35,6 +41,10 @@ void	init_shell(char *input)
 	free_process();
 }
 
+/*
+Bu fonksiyon, işletim sistemi tarafından SIGINT sinyali olarak adlandırılan bir sinyali ele alır ve bu sinyal, kullanıcının Ctrl + C tuşlarına basması durumunda tetiklenir. Fonksiyon, ekranda bir satır altına inmek için TIOCSTI ioctl çağrısı yapar ve sonra g_ms.ignore değişkenini TRUE olarak ayarlar. Bu, giriş ekranının "minishell_>" olarak tanımlanmış olan başlığını tekrar yazdırmasını ve kullanıcının tekrar komut girmesine izin vermesini sağlar.
+*/
+
 void	ctrl_c(int sig)
 {
 	(void)sig;
@@ -42,6 +52,10 @@ void	ctrl_c(int sig)
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	write(1, "\033[A", 3);
 }
+
+/*
+Bu fonksiyon, kullanıcı tarafından girilen verinin boş olup olmadığını kontrol eder. Eğer veri boşsa, ekrana "exit" yazdırır ve programı sonlandırır.
+*/
 
 void	ctrl_d(char *input)
 {
@@ -51,6 +65,10 @@ void	ctrl_d(char *input)
 		exit(errno);
 	}
 }
+
+/*
+Başlamadan önce uygulamayı başlatmak için `init_app` fonksiyonunu çağırır ve daha sonra sonsuz bir döngü içinde `readline` fonksiyonunu kullanarak kullanıcıdan girdi okur. Okunan girdi, `init_shell` fonksiyonu aracılığıyla işlenir ve işlenen girdi `add_history` fonksiyonu aracılığıyla geçmişe eklenir. Döngü sonunda, girdi bellekten boşaltılır ve döngü tekrar başlar.
+*/
 
 int	main(int ac, char **av, char **env)
 {
