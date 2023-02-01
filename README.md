@@ -182,3 +182,120 @@ Kullanıcının shell'de kullanabileceği bazı komutlar:
 <br>
 
 
+## KÜTÜPHANELER
+
+1.  "stdio.h": Standart Girdi/Çıktı kütüphanesi, fprintf(), scanf(), printf() gibi fonksiyonları içerir.
+   
+2.  "readline/readline.h": Kullanıcıdan girdi okuma fonksiyonlarını içerir.
+   
+3.  "readline/history.h": Kullanıcı tarafından girilen komutların geçmişini saklamaya yarar.
+
+4.  "unistd.h": Unix tabanlı sistemler için genel işlevleri tanımlar, örneğin exec(), fork() gibi.
+
+5.  "stdlib.h": Standart Kütüphane, malloc(), free(), exit() gibi fonksiyonları tanımlar.
+
+6.  "errno.h": Sistem çağrıları sırasında oluşan hata kodlarını tanımlar.
+
+7.  "string.h": String işlemleri için fonksiyonları tanımlar, örneğin strcmp(), strlen() gibi.
+
+8.  "sys/types.h": Sistem çağrıları için tip tanımlarını içerir.
+
+9.  "sys/wait.h": Çocuk süreçlerin beklenmesine yarar.
+
+10.  "fcntl.h": Dosya kontrol işlevlerini tanımlar.
+
+11.  "dirent.h": Dosya ve dizin işlemleri için fonksiyonları tanımlar.
+
+12.  "signal.h": Sinyal işlemlerini tanımlar, örneğin sigaction().
+
+13.  "sys/ioctl.h": Terminal boyutunu kontrol etmek için fonksiyonları tanımlar.
+
+
+<br>
+<br>
+
+
+## DEFINE 
+
+1.  TRUE ve FALSE: Mantıksal değerler için tanımlanmış sabit değerlerdir, bu değerler programda True ve False mantıksal değerleri ifade etmek için kullanılabilir.
+
+2.  DOLLAR_OP: '$' sembolünü tanımlar.
+
+3.  DOUBLE_QUOTE ve SINGLE_QUOTE: Çift ve tek tırnak sembollerini tanımlar.
+
+4.  CHILD_PROCESS ve MAIN_PROCESS: Çocuk ve ana süreçler için tanımlanmış sabit değerlerdir.
+
+5.  REPLACE ve APPEND: Dosya yazma modlarını tanımlar, REPLACE dosyanın içeriğini yazacak, APPEND dosyanın sonuna ekleme yapacak.
+
+
+<br>
+<br>
+
+
+## ENUMLAR
+
+Built-in komutlarını ve işlemlerin türlerini tanımlar.
+
+1.  e_builtin_types: Built-in komutlar için bir enumerasyon tanımlar. Her bir built-in komut için bir sabit değer belirlenmiştir. Örneğin, CD = 1 anlamına gelir ki CD komutu 1 numaralı tanımlanmış bir built-in komuttur.
+
+2.  e_ttype: Shell programındaki işlemlerin türleri için bir enumerasyon tanımlar. Her bir işlem türü için bir sabit değer belirlenmiştir. Örneğin, PIPE = 1 anlamına gelir ki PIPE işlemi 1 numaralı tanımlanmış bir işlem türüdür.
+
+
+<br>
+<br>
+
+
+## STRUCTLAR
+
+1.  t_token: Shell programındaki her bir girdiyi (input) tutmak için kullanılan bir yapı tanımıdır. Bu yapı, girdinin metnini (str), girdinin türünü (type), girdinin önceki ve sonraki girdilerini (prev ve next) içerir.
+
+2.  t_process: Shell programındaki her bir işlemi tutmak için kullanılan bir yapı tanımıdır. Bu yapı, işlemin PID numarasını (pid), işlemin giriş/çıkış akışını yönetmek için kullanılan dosya tanımlayıcılarını (fd), heredoc yapısının dosya tanımlayıcılarını (heredoc_fd), işlemi yapacak komutların listesini (execute), yönlendirme komutlarının listesini (redirects), işlemin önceki ve sonraki işlemlerini (prev ve next) içerir.
+
+3.  t_minishell: Minishell programının genel verilerini tutmak için kullanılan bir yapı tanımıdır. Bu yapı, programın anne işleminin PID numarasını (parent_pid), işlem sayısını (process_count), komutların yoksayılıp yoksayılmayacağını (ignore), ortam değişkenlerini (env), yolları (paths), token verilerini (token), işlem verilerini (process) içerir.
+
+
+<br>
+<br>
+
+
+## EXTERN KEYWORDÜ
+
+extern --> bir değişkenin ya da fonksiyonun diğer dosyalarda da tanımlanabileceğini belirtir. Bu anahtar kelime ile tanımlanan değişkenler veya fonksiyonlar programın diğer bölümlerinde erişilebilir ve kullanılabilir. "extern" anahtar kelimesi, tanımladığı değişkenin ya da fonksiyonun yalnızca başka bir dosyada tanımlı olduğunu belirtir, fakat bu dosya içinde tanımlanmaz.
+
+`extern t_minishell g_ms;` şu anlama gelir: `g_ms` adında bir global `t_minishell` tipinde bir değişken var ve bu dosya dışında tanımlanmış. Bu tanım, bu dosya içinde `g_ms` değişkenine erişebilmek için kullanılır ve bu değişkenin başka bir dosyada tanımlandığı anlaşılır.
+
+
+<br>
+<br>
+
+
+## MAKEFILE'DA KULLANILAN KOMUTLAR
+
+`$@` --> `$@` kullanımı Makefile dosyalarında, hedef dosyanın adını ifade eder. Örneğin, bir make komutuyla derlenmesi istenen objekt dosyasının adı "$@" ile belirtilebilir. Bu kısaltma, hedef dosyanın adının değiştiği durumlarda kodun otomatik olarak güncellenebilmesini sağlar.
+
+
+`$<` --> makefile içindeki bir hedef için ilk bağımlılık olarak tanımlanmış olan dosyanın adıdır.
+Makefile'daki bağımlılıklar, bir hedefin (örneğin, bir derleme komutu) hangi dosyalardan etkilendiğini belirtir. Eğer bağımlı dosyalardaki değişiklikler, o hedefe ait komutların tekrar çalışmasını gerektirirse, bu bağımlılıklar tanımlanır. Makefile içindeki bağımlılıklar, bir hedefin adının sol tarafındaki dosyalarla belirtilir ve sağ tarafındaki komutlar tarafından gerçekleştirilir.
+
+
+<br>
+<br>
+
+
+## main.c
+
+**func main -->** Ana fonksiyon, yürütme başlamadan önce uygulamayı başlatmak için `init_app` fonksiyonunu çağırır ve daha sonra sonsuz bir döngü içinde `readline` fonksiyonunu kullanarak kullanıcıdan girdi okur. Okunan girdi, `init_shell` fonksiyonu aracılığıyla işlenir ve işlenen girdi `add_history` fonksiyonu aracılığıyla geçmişe eklenir. Döngü sonunda, girdi bellekten boşaltılır ve döngü tekrar başlar.
+
+
+**func init_app -->** "init_app" adlı fonksiyon, uygulamanın başlatılması sırasında gerekli olan ilk adımların yapılmasını sağlar. Bu fonksiyon, bellekte errno değişkeni için bir boşluk açar, "g_ms.paths" global değişkenini NULL'a ayarlar, "g_ms.parent_pid" global değişkenini çalışan programın PID'sini alır, "set_env" fonksiyonunu çağırarak ortam değişkenlerini ayarlar ve "set_paths" fonksiyonunu çağırarak yolları ayarlar.
+
+
+**func init_shell -->** "init_shell" fonksiyonu, bir kullanıcı tarafından girilen komut satırının tokenize edilmesi, lexer tarafından analiz edilmesi ve sonuçta çalıştırılmasını sağlar. Bu fonksiyon, token dizilerini ve işlem dizilerini g_ms yapısı içerisinde tanımlar ve başlatır, ardından da çalıştırılması tamamlanan komut satırından boşalmasını sağlar.
+
+
+**func ctrl_c -->** Bu fonksiyon, işletim sistemi tarafından SIGINT sinyali olarak adlandırılan bir sinyali ele alır ve bu sinyal, kullanıcının Ctrl + C tuşlarına basması durumunda tetiklenir. Fonksiyon, ekranda bir satır altına inmek için TIOCSTI ioctl çağrısı yapar ve sonra g_ms.ignore değişkenini TRUE olarak ayarlar. Bu, giriş ekranının "minishell_>" olarak tanımlanmış olan başlığını tekrar yazdırmasını ve kullanıcının tekrar komut girmesine izin vermesini sağlar.
+
+
+**func ctrl_d -->** Bu fonksiyon, kullanıcı tarafından girilen verinin boş olup olmadığını kontrol eder. Eğer veri boşsa, ekrana "exit" yazdırır ve programı sonlandırır.
+
+
