@@ -1,5 +1,6 @@
-# minishell
-This project is about creating a simple shell.
+# MINISHELL
+
+## PDF Mandatory Part
 
 1.  Display a prompt: Bu, kullanıcının komut girdiğinde görünecek olan bir satır olmalıdır. <br>
 Örnek olarak "$" kullanabilirsiniz. Bu satırı her komut girişinde ekrana yazdırmak için while döngüsü kullanabilirsiniz.
@@ -178,4 +179,6 @@ Kullanıcının shell'de kullanabileceği bazı komutlar:
 
 
 <br>
+<br>
+
 
