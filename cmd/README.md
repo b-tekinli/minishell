@@ -16,7 +16,7 @@
 3.  İçin belirlenen dahili komutu çalıştırır (run_builtin fonksiyonu).
 4.  Girdi ve çıktı dosyalarını eski haline geri yükler (dup2 ile).
 5.  Yedek dosyaları kapatır (close).
-6. 
+
 Bu fonksiyon, dahili bir komutun çalışması sırasında girdi ve çıktı dosyalarının geçici olarak değiştirilmesini ve dahili komutun tamamlanmasından sonra orijinal durumlarına geri döndürülmesini sağlar.
 
 
