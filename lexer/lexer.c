@@ -28,11 +28,11 @@ int	append_arguments(t_token **token, t_process *process)
 		*token = (*token)->next;
 		if (!(*token) || (*token)->type != STRING)
 		{
-			free_token();
 			if (!(*token))
 				token_err(0);
 			else
 				token_err((*token)->type);
+			free_token();
 			return (FALSE);
 		}
 		data = clean_quote((*token)->str);
