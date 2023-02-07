@@ -28,7 +28,6 @@ void	builtin_cd(char **input)
 		home = getenv("HOME");
 		if (home && *home)
 			if (chdir(home))
-				errno = 1;
 				perror("minishell ");
 	}
 	if (!is_parent())
