@@ -19,15 +19,19 @@ void	builtin_cd(char **input)
 	if (input[1] != NULL)
 	{
 		if (chdir(input[1]) != 0)
-			perror("minishell ");
+			errno = 1;
+			write(2, "minishell : No such file or directory\n", 38);
+			strerror(errno); 
 	}
 	else
 	{
 		home = getenv("HOME");
 		if (home && *home)
 			if (chdir(home))
+				errno = 1;
 				perror("minishell ");
 	}
 	if (!is_parent())
 		exit (errno);
 }
+
